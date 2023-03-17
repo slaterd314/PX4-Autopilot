@@ -407,6 +407,12 @@
 #define PIN_UART4_RTS     PIN_UART4_RTS_2
 #define PIN_UART4_CTS     PIN_UART4_CTS_1
 
+#define PIN_LPUART4_RX      PIN_LPUART4_RX_1
+#define PIN_LPUART4_TX      PIN_LPUART4_TX_1
+#define PIN_LPUART4_RTS     PIN_LPUART4_RTS_2
+#define PIN_LPUART4_CTS     PIN_LPUART4_CTS_1
+
+
 /*
  * Ethernet TJA1100 OPEN Alliance BroadR-Reach PHY for Automotive Ethernet
  * -----------------------------------------------------------------------

@@ -47,12 +47,22 @@
  *       contiguous block in the memory map.
  */
 
+ /* The IMX8MM Cortex M4 core has 256K contigious bytes of TCM memory starting
+ * at 0x1FFE000 split evenly between SRAM_L and SRAM_U.
+ * 2GB od DDR RAM is available starting at address 0x40000000.
+ * For the IMX8MM, we'll continue to load datasram into TCM memory, but move its
+ * stating address to 0x1FFE0000.
+ * We'll load the rest of the program segments into DDR RAM above 0x80000000
+ *
+ */
+
 MEMORY
 {
-	vectflash  (rx)  : ORIGIN = 0x00006000, LENGTH = 1K
-	cfmprotect (rx)  : ORIGIN = 0x00006400, LENGTH = 16
-	progflash  (rx)  : ORIGIN = 0x00006410, LENGTH = 2M - ((6*4K) + 1K + 16)
-	datasram  (rwx)  : ORIGIN = 0x1fff0000, LENGTH = 256K
+	vectflash  (rx)  : ORIGIN = 0x80006000, LENGTH = 1K
+	cfmprotect (rx)  : ORIGIN = 0x80006400, LENGTH = 16
+	progflash  (rx)  : ORIGIN = 0x80006410, LENGTH = 2M - ((6*4K) + 1K + 16)
+	datasram  (rwx)  : ORIGIN = 0x1ffE0000, LENGTH = 256K
+/* 	datasram  (rwx)  : ORIGIN = 0x1fff0000, LENGTH = 256K */
 }
 
 OUTPUT_ARCH(arm)
@@ -69,6 +79,13 @@ SECTIONS
 	.cfmprotect : {
 		KEEP(*(.cfmconfig))
 	} > cfmprotect
+
+	.resource_table :
+	{
+	. = ALIGN(8);
+	KEEP(*(.resource_table)) /* Resource table */
+	. = ALIGN(8);
+	} > m_text
 
 	.text : {
 		_stext = ABSOLUTE(.);
