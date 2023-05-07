@@ -2,6 +2,8 @@
 #
 # @name Generic Output
 #
+# @type Standard Plane
+# @class Plane
 # @maintainer
 #
 # @board bitcraze_crazyflie exclude

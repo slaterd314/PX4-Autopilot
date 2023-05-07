@@ -188,6 +188,10 @@ add_nuttx_dir(fs fs y -D__KERNEL__ all)
 add_nuttx_dir(sched sched y -D__KERNEL__ all)
 add_nuttx_dir(xx libs/libxx n "" all)
 add_nuttx_dir(crypto crypto y -D__KERNEL__ all)
+add_nuttx_dir(openamp openamp y -D__KERNEL__ all)
+
+
+
 
 if (NOT CONFIG_BUILD_FLAT)
 	add_nuttx_dir(arch arch/${CONFIG_ARCH}/src n "" arch)
